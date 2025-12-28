@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build: .
+    container_name: oai-sidelink-dashboard
+    image: iabg/oai-sidelink-dashboard:latest
+    ports:
+      - "5000:5000"
+    volumes:
+      # Mount log files from host (read-only)
+      - ${HOME}/syncref_sl.log:/logs/syncref_sl.log:ro
+      - ${HOME}/nearby_ue_sl.log:/logs/nearby_ue_sl.log:ro
+    environment:
+      - SYNCREF_LOG=/logs/syncref_sl.log
+      - NEARBY_LOG=/logs/nearby_ue_sl.log
+      - FLASK_ENV=production
+    restart: unless-stopped
+    networks:
+      - sidelink-net
+    labels:
+      - "com.iabg.project=oai-sidelink"
+      - "com.iabg.description=5G Sidelink Tactical Dashboard"
+      - "com.iabg.author=Ahmad Sharique"
+
+networks:
+  sidelink-net:
+    driver: bridge
+    name: sidelink-network

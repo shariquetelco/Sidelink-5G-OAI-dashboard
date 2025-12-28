@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sidelink 5G Tactical Monitor - IABG</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tactical.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <img src="{{ url_for('static', filename='images/IABG_Logo.png') }}" alt="IABG Logo" class="logo">
+            <div class="header-title">
+                <h1>🛡️  SIDELINK 5G TACTICAL DASHBOARD - IABG</h1>
+                <div class="subtitle">Mission: Device-to-Device Tactical Communications (Mode 2)</div>
+            </div>
+        </div>
+        <div class="classified-badge">[CLASSIFIED]</div>
+    </div>
+
+    <!-- Network Topology -->
+    <div class="topology-section">
+        <h2>NETWORK TOPOLOGY</h2>
+        <div class="topology-diagram">
+            <div class="ue-box alpha">
+                <h3>🔴 UNIT ALPHA</h3>
+                <div>(SyncRef)</div>
+            </div>
+            <div class="link-arrow">◄────SIDELINK────►<br>Direct PC5</div>
+            <div class="ue-box bravo">
+                <h3>🔵 UNIT BRAVO</h3>
+                <div>(Nearby)</div>
+            </div>
+        </div>
+        <div class="network-status">
+            <p id="gnb-status"><span class="status-indicator offline"></span>⚠️ gNB: OFFLINE (Not Required - Autonomous Mode)</p>
+            <p id="core-status"><span class="status-indicator offline"></span>⚠️ CORE: OFFLINE (Not Required - Direct Comms)</p>
+            <p id="topology-status"><span class="status-indicator online"></span>STATUS: ✅ TACTICAL LINK ESTABLISHED</p>
+        </div>
+    </div>
+
+    <!-- Link Performance -->
+    <div class="performance-section">
+        <h2>📈 LINK PERFORMANCE METRICS</h2>
+        <div class="quality-bar-container">
+            <label>Overall Link Quality:</label>
+            <div class="quality-bar">
+                <div id="quality-bar-fill" class="quality-bar-fill" style="width: 100%;">
+                    100% ✅ EXCELLENT
+                </div>
+            </div>
+        </div>
+        <div class="performance-stats">
+            <div class="performance-stat">
+                <div class="metric-label">PSSCH Decode Success:</div>
+                <div id="pssch-decode" class="metric-value success">0/0 (100.0%)</div>
+            </div>
+            <div class="performance-stat">
+                <div class="metric-label">PSBCH Decode Success:</div>
+                <div id="psbch-decode" class="metric-value success">0/0 (100.0%)</div>
+            </div>
+            <div class="performance-stat">
+                <div class="metric-label">Packet Error Rate (PER):</div>
+                <div id="packet-error-rate" class="metric-value">0.00%</div>
+            </div>
+            <div class="performance-stat">
+                <div class="metric-label">Throughput:</div>
+                <div class="metric-value">~2.5 Mbps (estimated)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UE Cards -->
+    <div class="ue-cards">
+        <!-- Unit Alpha (SyncRef UE) -->
+        <div class="ue-card alpha">
+            <div class="ue-card-header">
+                <h3>🔴 UNIT ALPHA (SyncRef)</h3>
+                <span id="syncref-status" class="status-badge operational">✅ OPERATIONAL</span>
+            </div>
+
+            <div class="metric-section">
+                <h4>📡 RADIO PARAMETERS</h4>
+                <div class="metric-row">
+                    <span class="metric-label">├─ Carrier:</span>
+                    <span id="syncref-carrier" class="metric-value">2.6 GHz</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ Bandwidth:</span>
+                    <span id="syncref-bandwidth" class="metric-value">106 RBs</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ MCS:</span>
+                    <span id="syncref-mcs" class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">└─ TX Power:</span>
+                    <span id="syncref-tx-power" class="metric-value">23 dBm</span>
+                </div>
+            </div>
+
+            <div class="metric-section">
+                <h4>📊 PHY LAYER STATS</h4>
+                <div class="metric-row">
+                    <span class="metric-label">├─ Frame/Slot:</span>
+                    <span id="syncref-frame-slot" class="metric-value">0:0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSBCH TX:</span>
+                    <span id="syncref-psbch-tx" class="metric-value success">0 ✅</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSCCH TX:</span>
+                    <span id="syncref-pscch-tx" class="metric-value success">0 ✅</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSSCH TX:</span>
+                    <span id="syncref-pssch-tx" class="metric-value success">0 ✅</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSFCH TX:</span>
+                    <span id="syncref-psfch-tx" class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">└─ Success Rate:</span>
+                    <span id="syncref-success-rate" class="metric-value success">100.0%</span>
+                </div>
+            </div>
+
+            <div class="metric-section">
+                <h4>🔐 LINK QUALITY</h4>
+                <div class="metric-row">
+                    <span class="metric-label">├─ RSRP:</span>
+                    <span id="syncref-rsrp" class="metric-value">-45 dBm</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ SINR:</span>
+                    <span id="syncref-sinr" class="metric-value">25 dB</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ CQI:</span>
+                    <span id="syncref-cqi" class="metric-value">15</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">└─ Decode Errors:</span>
+                    <span id="syncref-errors" class="metric-value">0/0</span>
+                </div>
+            </div>
+
+            <div class="metric-section">
+                <h4>💾 TERMINAL OUTPUT (Live)</h4>
+                <div id="syncref-terminal" class="terminal">
+                    <div class="terminal-line">Waiting for data...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit Bravo (Nearby UE) -->
+        <div class="ue-card bravo">
+            <div class="ue-card-header">
+                <h3>🔵 UNIT BRAVO (Nearby UE)</h3>
+                <span id="nearby-status" class="status-badge operational">✅ OPERATIONAL</span>
+            </div>
+
+            <div class="metric-section">
+                <h4>📡 RADIO PARAMETERS</h4>
+                <div class="metric-row">
+                    <span class="metric-label">├─ Carrier:</span>
+                    <span id="nearby-carrier" class="metric-value">2.6 GHz</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ Bandwidth:</span>
+                    <span id="nearby-bandwidth" class="metric-value">106 RBs</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ MCS:</span>
+                    <span id="nearby-mcs" class="metric-value">9</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ RX Gain:</span>
+                    <span id="nearby-rx-gain" class="metric-value">Auto</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">└─ Synced:</span>
+                    <span id="nearby-synced" class="metric-value success">✅ Yes</span>
+                </div>
+            </div>
+
+            <div class="metric-section">
+                <h4>📊 PHY LAYER STATS</h4>
+                <div class="metric-row">
+                    <span class="metric-label">├─ Frame/Slot:</span>
+                    <span id="nearby-frame-slot" class="metric-value">0:0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSBCH RX:</span>
+                    <span id="nearby-psbch-rx" class="metric-value success">0 ✅</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSCCH RX:</span>
+                    <span id="nearby-pscch-rx" class="metric-value success">0 ✅</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSSCH RX:</span>
+                    <span id="nearby-pssch-rx" class="metric-value success">0 ✅</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ PSFCH TX:</span>
+                    <span id="nearby-psfch-tx" class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">└─ Success Rate:</span>
+                    <span id="nearby-success-rate" class="metric-value success">100.0%</span>
+                </div>
+            </div>
+
+            <div class="metric-section">
+                <h4>🔐 LINK QUALITY</h4>
+                <div class="metric-row">
+                    <span class="metric-label">├─ RSRP:</span>
+                    <span id="nearby-rsrp" class="metric-value">-48 dBm</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ SINR:</span>
+                    <span id="nearby-sinr" class="metric-value">24 dB</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">├─ CQI:</span>
+                    <span id="nearby-cqi" class="metric-value">15</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">└─ Decode Errors:</span>
+                    <span id="nearby-errors" class="metric-value">0/0</span>
+                </div>
+            </div>
+
+            <div class="metric-section">
+                <h4>💾 TERMINAL OUTPUT (Live)</h4>
+                <div id="nearby-terminal" class="terminal">
+                    <div class="terminal-line">Waiting for data...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Log -->
+    <div class="events-section">
+        <h2>⚡ MISSION EVENTS LOG</h2>
+        <div id="event-log" class="event-log">
+            <div class="event-item">
+                <span class="event-time">--:--:--</span>
+                Waiting for events...
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="usecase-section">
+        <h2>🎯 USE CASE: TACTICAL DEFENSE SCENARIOS</h2>
+        <div class="usecase-list">
+            <div class="usecase-item">✓ Infantry squad communications (no cell tower needed)</div>
+            <div class="usecase-item">✓ Vehicle-to-vehicle tactical data exchange</div>
+            <div class="usecase-item">✓ Disaster relief operations (infrastructure down)</div>
+            <div class="usecase-item">✓ Border patrol mesh networks</div>
+            <div class="usecase-item">✓ Critical infrastructure monitoring (oil rigs, ports)</div>
+            <div class="usecase-item">✓ Military convoy coordination</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="background: rgba(20, 27, 45, 0.8); border-top: 2px solid var(--accent-blue); padding: 1rem 2rem; margin-top: 2rem; text-align: center; color: var(--text-secondary);">
+        <p style="margin: 0; font-size: 0.9rem;">
+            Prepared by <strong style="color: var(--accent-blue);">AHMAD SHARIQUE</strong>, IABG CTSF 20
+        </p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
