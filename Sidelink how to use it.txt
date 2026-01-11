@@ -1,0 +1,44 @@
+START
+
+UE1
+❯ cd /mnt/c/TouchdownOld/srsran5g/oai-5g-sidelink/cmake_targets/ran_build/build
+
+sudo LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH -E \
+  RFSIMULATOR=127.0.0.1 \
+  ./nr-uesoftmodem \
+  -O ../../../targets/PROJECTS/NR-SIDELINK/CONF/sl_ue1.conf \
+  --sa \
+  --sl-mode 2 \
+  --rfsim \
+  --rfsimulator.serverport 4048 \
+  --log_config.global_log_options level,nocolor,time \
+  2>&1 | tee ~/nearby_ue_sl.log
+
+UE2
+❯ cd /mnt/c/TouchdownOld/srsran5g/oai-5g-sidelink/cmake_targets/ran_build/build
+
+sudo LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH -E \
+  RFSIMULATOR=127.0.0.1 \
+  ./nr-uesoftmodem \
+  -O ../../../targets/PROJECTS/NR-SIDELINK/CONF/sl_ue1.conf \
+  --sa \
+  --sl-mode 2 \
+  --rfsim \
+  --rfsimulator.serverport 4048 \
+  --log_config.global_log_options level,nocolor,time \
+  2>&1 | tee ~/nearby_ue_sl.log
+
+Dashboard
+❯ cd /mnt/c/TouchdownOld/srsran5g/oai-sidelink-dashboard
+ python3 app.py
+
+Log1
+tail -f ~/syncref_sl.log | grep "PSBCH Stats"
+
+Log2
+tail -f ~/nearby_ue_sl.log | grep "PSBCH Stats"
+
+Log3
+watch -n 1 'tail -5 ~/syncref_sl.log | grep "PSSCH Stats"'
+
+------------------------------------------------

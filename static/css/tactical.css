@@ -433,6 +433,188 @@ body {
     background: var(--accent-blue);
 }
 
+/* ============================================
+   RESEARCH GRADE ADDITIONS
+   ============================================ */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.export-btn {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.export-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+.export-btn:active {
+    transform: scale(0.98);
+}
+
+.research-section {
+    background: rgba(20, 27, 45, 0.9);
+    border: 2px solid var(--border-glow);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 2rem;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+}
+
+.research-section h2 {
+    color: var(--accent-blue);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.chart-info {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--accent-yellow);
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+}
+
+.chart-info p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.chart-info strong {
+    color: var(--accent-yellow);
+    font-weight: bold;
+}
+
+.sequence-container {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+    padding: 2rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+}
+
+.sequence-container .mermaid {
+    background: transparent;
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+}
+
+.sequence-container svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.sequence-container text {
+    fill: var(--text-primary) !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.sequence-container .actor {
+    fill: rgba(20, 27, 45, 0.9) !important;
+    stroke: var(--accent-blue) !important;
+    stroke-width: 2px !important;
+}
+
+.sequence-container .messageLine0,
+.sequence-container .messageLine1 {
+    stroke: var(--accent-green) !important;
+    stroke-width: 2px !important;
+}
+
+.sequence-container .activation0,
+.sequence-container .activation1,
+.sequence-container .activation2 {
+    fill: rgba(0, 212, 255, 0.2) !important;
+    stroke: var(--accent-blue) !important;
+}
+
+.sequence-container .note {
+    fill: rgba(255, 204, 0, 0.1) !important;
+    stroke: var(--accent-yellow) !important;
+    stroke-width: 2px !important;
+}
+
+.sequence-container .noteText {
+    fill: var(--text-primary) !important;
+}
+
+.chart-container.loading::after {
+    content: "⟳ Loading data...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-blue);
+    font-size: 1.2rem;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .header, .export-btn, .classified-badge {
+        display: none;
+    }
+    
+    .research-section, .chart-container {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .chart-container canvas {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
 @media (max-width: 1200px) {
     .ue-cards {
         grid-template-columns: 1fr;

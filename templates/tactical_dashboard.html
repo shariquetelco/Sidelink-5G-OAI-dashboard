@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Sidelink 5G Tactical Monitor - IABG</title>
+    <title>OAI 5G Sidelink Tactical Monitor - IABG Research Grade</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tactical.css') }}">
+    
+    <!-- Chart.js for real-time graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Mermaid.js for sequence diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -12,11 +18,14 @@
         <div class="header-left">
             <img src="{{ url_for('static', filename='images/IABG_Logo.png') }}" alt="IABG Logo" class="logo">
             <div class="header-title">
-                <h1>🛡️  SIDELINK 5G TACTICAL DASHBOARD - IABG</h1>
-                <div class="subtitle">Mission: Device-to-Device Tactical Communications (Mode 2)</div>
+                <h1>🛡️ SIDELINK 5G TACTICAL DASHBOARD - IABG</h1>
+                <div class="subtitle">Mission: Device-to-Device Tactical Communications (Mode 2) - Research Grade</div>
             </div>
         </div>
-        <div class="classified-badge">[CLASSIFIED]</div>
+        <div class="header-right">
+            <div class="classified-badge">[CLASSIFIED]</div>
+            <button onclick="window.location.href='/api/export/csv'" class="export-btn">📊 Export CSV</button>
+        </div>
     </div>
 
     <!-- Network Topology -->
@@ -40,7 +49,7 @@
         </div>
     </div>
 
-    <!-- Link Performance -->
+    <!-- Link Performance (existing) -->
     <div class="performance-section">
         <h2>📈 LINK PERFORMANCE METRICS</h2>
         <div class="quality-bar-container">
@@ -71,7 +80,40 @@
         </div>
     </div>
 
-    <!-- UE Cards -->
+    <!-- NEW: Real-Time Throughput Graph -->
+    <div class="research-section">
+        <h2>📊 RESEARCH METRICS: REAL-TIME THROUGHPUT ANALYSIS</h2>
+        <div class="chart-container">
+            <canvas id="throughputChart"></canvas>
+        </div>
+        <div class="chart-info">
+            <p>📌 <strong>Analysis:</strong> Bidirectional data flow between Unit Alpha and Unit Bravo. Solid lines = TX, Dashed lines = RX. Update interval: 2 seconds.</p>
+        </div>
+    </div>
+
+    <!-- NEW: Signal Quality Trends -->
+    <div class="research-section">
+        <h2>📡 SIGNAL QUALITY TRENDS (UNIT ALPHA)</h2>
+        <div class="chart-container">
+            <canvas id="signalChart"></canvas>
+        </div>
+        <div class="chart-info">
+            <p>📌 <strong>Metrics:</strong> RSRP = Reference Signal Received Power | SINR = Signal-to-Interference-plus-Noise Ratio | CQI = Channel Quality Indicator (0-15)</p>
+        </div>
+    </div>
+
+    <!-- NEW: Channel Frequency Response -->
+    <div class="research-section">
+        <h2>🌊 CHANNEL FREQUENCY RESPONSE (SPECTRUM ANALYSIS)</h2>
+        <div class="chart-container">
+            <canvas id="spectrumChart"></canvas>
+        </div>
+        <div class="chart-info">
+            <p>📌 <strong>Spectrum:</strong> 106 Resource Blocks spanning 2.6 GHz ± 53 MHz. Red curve = measured channel response, Gray area = noise floor. Simulated FFT visualization.</p>
+        </div>
+    </div>
+
+    <!-- UE Cards (existing) -->
     <div class="ue-cards">
         <!-- Unit Alpha (SyncRef UE) -->
         <div class="ue-card alpha">
@@ -244,7 +286,24 @@
         </div>
     </div>
 
-    <!-- Events Log -->
+    <!-- NEW: Protocol Message Flow Sequence Diagram -->
+    <div class="research-section">
+        <h2>🔄 PROTOCOL MESSAGE FLOW (LIVE SEQUENCE DIAGRAM)</h2>
+        <div class="sequence-container" id="messageFlowDiagram">
+            <pre class="mermaid">
+sequenceDiagram
+    participant Alpha as 🔴 Unit Alpha<br/>(SyncRef)
+    participant Bravo as 🔵 Unit Bravo<br/>(Nearby)
+    
+    Note over Alpha,Bravo: Initializing...
+            </pre>
+        </div>
+        <div class="chart-info">
+            <p>📌 <strong>Protocol Flow:</strong> Real-time visualization of sidelink message exchange. PSBCH for synchronization, PSSCH for data, PSFCH for feedback.</p>
+        </div>
+    </div>
+
+    <!-- Events Log (existing) -->
     <div class="events-section">
         <h2>⚡ MISSION EVENTS LOG</h2>
         <div id="event-log" class="event-log">
@@ -255,7 +314,7 @@
         </div>
     </div>
 
-    <!-- Use Cases -->
+    <!-- Use Cases (existing) -->
     <div class="usecase-section">
         <h2>🎯 USE CASE: TACTICAL DEFENSE SCENARIOS</h2>
         <div class="usecase-list">
@@ -271,7 +330,7 @@
     <!-- Footer -->
     <div style="background: rgba(20, 27, 45, 0.8); border-top: 2px solid var(--accent-blue); padding: 1rem 2rem; margin-top: 2rem; text-align: center; color: var(--text-secondary);">
         <p style="margin: 0; font-size: 0.9rem;">
-            Prepared by <strong style="color: var(--accent-blue);">AHMAD SHARIQUE</strong>, IABG CTSF 20
+            Prepared by <strong style="color: var(--accent-blue);">AHMAD SHARIQUE</strong>, IABG CTSF 20 | Research-Grade Monitoring Platform
         </p>
     </div>
 
