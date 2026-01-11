@@ -137,6 +137,19 @@ Decode Success: 100%
 
 ---
 
+### Research-Grade Charts
+The dashboard includes IEEE-publication-ready visualizations:
+- Real-time throughput analysis
+- Signal quality trends
+- Channel frequency response
+- Protocol message flow diagrams
+
+Perfect for:
+- 📄 Academic papers (IEEE, ESA)
+- 🎓 Research demonstrations
+- 🛡️ Defense customer presentations
+- 📊 Performance analysis reports
+
 ## 🚀 Features
 
 ### Dashboard Capabilities
@@ -152,6 +165,15 @@ Decode Success: 100%
 - ✅ **Tactical UI Design** - Military-grade dark theme with IABG branding
 - ✅ **Defense Use Cases** - Scenario-specific applications
 
+### Research-Grade Features (NEW)
+
+- ✅ **Real-Time Throughput Graphs** - Bidirectional TX/RX monitoring for both UEs
+- ✅ **Signal Quality Trends** - RSRP, SINR, CQI historical analysis
+- ✅ **Spectrum Visualization** - Channel frequency response (FFT-style)
+- ✅ **Protocol Message Flow** - Live sequence diagrams (Mermaid.js)
+- ✅ **Data Export** - CSV export for academic publications
+- ✅ **Historical Data Storage** - 4-minute rolling buffer (120 samples)
+- ✅ **Multi-Metric Charts** - Chart.js powered visualizations
 ### Technical Specifications
 
 **Sidelink Configuration:**
